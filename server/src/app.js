@@ -34,6 +34,8 @@ app.use(
       if (
         allowedOrigins.includes(origin) ||
         origin.endsWith('.vercel.app') ||
+        origin.endsWith('.onrender.com') ||
+        origin.endsWith('.netlify.app') ||
         process.env.NODE_ENV !== 'production'
       ) {
         return callback(null, true);
