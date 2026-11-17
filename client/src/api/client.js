@@ -3,9 +3,17 @@ import axios from 'axios';
 const getBaseUrl = () => {
   let url = import.meta.env.VITE_API_URL;
   if (!url) return '/api';
-  if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    url = `https://${url}`;
+
+  // Strip leading protocols
+  url = url.replace(/^https?:\/\//, '');
+
+  // If Render passed an internal service name like 'ownly-api-xxxx' without dots, append .onrender.com
+  const hostPart = url.split('/')[0];
+  if (!hostPart.includes('.')) {
+    url = url.replace(hostPart, `${hostPart}.onrender.com`);
   }
+
+  url = `https://${url}`;
   return url.endsWith('/api') ? url : `${url.replace(/\/$/, '')}/api`;
 };
 

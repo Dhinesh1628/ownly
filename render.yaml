@@ -30,7 +30,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: ownly-api
-          property: host
+        value: https://ownly-api-vx0c.onrender.com/api
